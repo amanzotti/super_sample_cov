@@ -1,0 +1,37 @@
+\input{/Users/alessandromanzotti/Work/preamble.tex}
+
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\title{CMB DC Mode}
+\author{}
+\affiliation{Department of Astronomy \& Astrophysics, University of Chicago, Chicago IL 60637}
+\date{\today}
+
+\section{Fisher\_estimate}
+
+In this code I load the CAMB $C_{\ell}$s and I compute the Fisher estimates of the effect we are looking for, given a precise detector precision. The idea is expressed in Wayne's notes.
+\begin{equation}
+C_l = C_l^{\rm fid} \left[ 1+ \frac{\partial \ln (l^2 C_l^{\rm fid} )}{\partial \ln l} s \right],
+\end{equation}
+do a Fisher estimate of $\sigma_s^2$ (no other parameters marignalized) and compare it to $\sigma_\kappa^2$.  
+It means it the code to compute
+\begin{equation}
+C_l =  C^{\rm fid}\frac{\partial \ln (l^2 C_l^{\rm fid}) }{\partial \ln l},
+\end{equation}
+using  a spline function.
+after that in the fisher formalism
+\ben
+F_{ss}=\sum_{\ell}\frac{1}{(\delta C_{\ell})^{2}}\left( C^{\rm fid}\frac{\partial \ln (l^2 C_l^{\rm fid} )}{\partial \ln l}\right)^{2}
+\een
+\ben
+F_{ss}=\sum_{\ell}\frac{(2\ell+1)f_{\rm sky}}{2[C_{\ell}+N_{\ell}]^{2}}\left( C^{\rm fid}\frac{\partial \ln (l^2 C_l^{\rm fid} )}{\partial \ln l}\right)^{2}
+\een
+
+assuming SPT-pol 4$\mu K$-arcminute noise and a beam of 1-arcmin
+\be
+N_{\ell}=\exp\{-\ell(\ell+1)\theta_{FMWH}/(8\log 2)\}
+\ee
+
+
+\end{document}

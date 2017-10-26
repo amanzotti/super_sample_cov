@@ -1,0 +1,114 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = 0.0 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.2in
+\parindent = 0.0in
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\newcommand{\bl}{{\bf l}}
+\newcommand{\bL}{{\bf L}}
+\title{Super Sample Lensing}
+\author{W. Hu}
+\begin{document}
+\maketitle
+
+We treat the effects of CMB lensing of the power spectrum by modes that are larger
+than the survey area.
+
+Following Takada \& Hu, this effect is described by squeezed trispectrum configurations.
+Let us start with the flat-sky trispectrum of the lensed temperature field 
+\begin{equation}
+\langle \Theta(\bl_1) \Theta(\bl_2) \Theta(\bl_3) \Theta(\bl_4) \rangle_c
+= (2\pi)^2 \delta(\bl_1+\bl_2+\bl_3+\bl_4) T(\bl_1,\bl_2,\bl_3,\bl_4) .
+\end{equation}
+To leading order in the lenses, the lensing trispectrum is given by
+\begin{equation}
+T(\bl_1,\bl_2,\bl_3,\bl_4) = C_{l_1} C_{l_3} C^{\phi\phi}_{|\bl_1+\bl_2|} 
+\left[ (\bl_1+\bl_2)\cdot \bl_1 \right] 
+\left[ (\bl_3+\bl_4)\cdot \bl_3 \right] + {\rm perm}
+\end{equation}
+where perm means all permutations of the $\bl_i$ and the delta function condition 
+sets $\bL \equiv \bl_1+\bl_2= -(\bl_3+\bl_4)$.   
+The covariance between binned estimators of the power spectrum in shells
+around $l$ and $l'$ is
+\begin{equation}
+{\rm Cov}[{C_{l},C_{l'} }]  = \frac{1}{A^2} \int \frac{d^2 l}{A_l} \int \frac{d^2 l'}{A_l'} 
+\int \frac{d^2 L}{(2\pi)^2} | W(L)|^2 T(l,-l+L,l',-l'-L) + {\rm subsurvey\ terms}
+\end{equation}
+where $A$ is the survey area, $A_l= 2\pi l dl$ is the shell area, $W$ is the transform of
+the sky mask assumed to be 1 in the measured region and 0 in the unmeasured.  Note
+that the window connects multipoles that are separated by less than its fundamental mode and so the covariance no longer depends only on degenerate quadrilaterals with
+$(\bl,-\bl,\bl',-\bl')$.
+
+
+Now let us evaluate the squeezed limit. In this case we are interested in lens modes
+$L\ll l_1, l_3$.    We therefore expand
+\begin{eqnarray}
+l_2 &= & l_1 - \frac{\bl_1\cdot (\bl_1+\bl_2)}{l_1} \nonumber\\
+l_4 &= & l_3 - \frac{\bl_3 \cdot (\bl_3+\bl_4)}{l_3} 
+\end{eqnarray}
+so that
+\begin{eqnarray}
+C_{l_2} &= & C_{l_1}\left[ 1-  \frac{\partial \ln C_l }{\partial \ln l} \Big|_{l_1} \frac{\bl_1\cdot (\bl_1+\bl_2)}{l_1^2}\right] \nonumber\\
+C_{l_4} &= & C_{l_3}\left[ 1-  \frac{\partial \ln C_l }{\partial \ln l} \Big|_{l_3}  \frac{\bl_3 \cdot (\bl_3+\bl_4)}{l_3^2 } \right] \nonumber\\
+\end{eqnarray} 
+and rewrite
+\begin{eqnarray}
+(\bl_1+\bl_2)\cdot \bl_2& =& -(\bl_1+\bl_2)\cdot \bl_1+  (\bl_1+\bl_2)\cdot  (\bl_1+\bl_2) \nonumber\\
+(\bl_3+\bl_4)\cdot \bl_4 &= &-(\bl_3+\bl_4)\cdot \bl_3+  (\bl_3+\bl_4)\cdot  (\bl_3+\bl_4) 
+\end{eqnarray}
+Averaging over the orientation of the modes only quadratic terms in the dot products
+survive giving
+\begin{eqnarray}
+T(\bl_1,\bl_2,\bl_3,\bl_4) & =& \frac{1}{4} C_{l_1} C_{l_3} L^4 C^{\phi\phi}_{L}  \frac{\partial \ln C_l }{\partial \ln l}\Big|_{l_1} \frac{\partial \ln C_l }{\partial \ln l} \Big|_{l_3}  +
+C_{l_1} C_{l_3} L^4 C^{\phi\phi}_{L} \nonumber\\
+&=& \frac{1}{4} C_{l_1} C_{l_3} L^4 C^{\phi\phi}_{L}  \frac{\partial \ln l^2 C_l }{\partial \ln l}\Big|_{l_1} \frac{\partial \ln l^2 C_l }{\partial \ln l} \Big|_{l_3} 
+\end{eqnarray}
+We can now interpret this expression physically:  the factor $L^4 C_L^{\phi\phi}/4$ is the 
+convergence power spectrum in the flat sky approximation.   The derivatives of $l^2 C_l$ 
+represent the DC mode of the convergence shifting the angular scale of the dimensionless
+temperature power spectrum.  In other words each realization of a finite survey has a net
+mean convergence which shifts the whole power spectrum in angular scale from the ensemble mean.   
+This simple effect masquerades as a covariance between modes since all the multipoles
+below the survey shift in a correlated way.
+
+Thus the trispectrum model for the super sample mode covariance is
+\begin{equation}
+{\rm Cov}[{C_{l},C_{l'} }] = C_{l} C_{l' }  \frac{\partial \ln {l'}^2 C_{l'} }{\partial \ln l'} \frac{\partial \ln l^2 C_l }{\partial \ln l} \sigma_\kappa^2  + {\rm subsurvey\ terms}
+\end{equation}
+where $\sigma_\kappa^2$ is the variance of the convergence field in the survey mask
+\begin{equation}
+\sigma_\kappa^2 =\frac{1}{A^2} \int \frac{d^2 L}{(2\pi)^2} \frac{L^4}{4} C_L^{\phi\phi} |W(L)|^2
+\end{equation}
+where the factors of $A$ come from convention for the normalization of $W$ such that $\lim_{L\rightarrow 0} W(L)/A = 1$.
+
+To see if this is an important effect, we can compare this to the precision with which a parameter
+that similarly shifts the angular scale of the power spectrum can be measured with Gaussian statistics.   Since $\theta_*$ serves this purpose for the acoustic peaks, we can compare to that as a proxy.   Alternately, we 
+can construct an artificial parameter 
+\begin{equation}
+C_l = C_l^{\rm fid} \left[ 1+ \frac{\partial \ln l^2 C_l^{\rm fid} }{\partial \ln l} s \right],
+\end{equation}
+do a Fisher estimate of $\sigma_s^2$ (no other parameters marignalized) and compare it to $\sigma_\kappa^2$.  Preliminary estimates suggest that it is marginally important at best.
+
+
+
+
+
+
+
+
+
+
+ \end{document}
